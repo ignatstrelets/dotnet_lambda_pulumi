@@ -1,0 +1,16 @@
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/LambdaDemo.deps.json
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/LambdaDemo.runtimeconfig.json
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/LambdaDemo.pdb
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/Amazon.Lambda.APIGatewayEvents.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/Amazon.Lambda.Core.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/Amazon.Lambda.Serialization.SystemTextJson.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/AWSSDK.Core.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/AWSSDK.SecretsManager.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/Microsoft.Extensions.Logging.Abstractions.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/Newtonsoft.Json.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/Npgsql.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/System.Diagnostics.DiagnosticSource.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/System.Text.Encodings.Web.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/System.Text.Json.dll
+/home/ubuntu/LambdaDemo/src/LambdaDemo/bin/Release/net6.0/publish/LambdaDemo.dll

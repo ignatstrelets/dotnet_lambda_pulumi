@@ -1,0 +1,10 @@
+name: deployment_p_p
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A Python program to deploy a serverless application on AWS
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: ""

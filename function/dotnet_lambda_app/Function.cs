@@ -27,7 +27,8 @@ public class Function
 {
      
         public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request)	
-        {
+        {   Console.WriteLine("Function startup");
+
 	    string region = Environment.GetEnvironmentVariable("AWS_REGION");
 	    
 	    string secretName = Environment.GetEnvironmentVariable("SECRET_NAME");

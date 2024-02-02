@@ -42,12 +42,18 @@ lambda_sg = aws.ec2.SecurityGroup(
                 protocol="tcp",
                 cidr_blocks=["0.0.0.0/0"],
                 ),
+            aws.ec2.SecurityGroupIngressArgs(
+                from_port=0,
+                to_port=0,
+                protocol="-1",
+                cidr_blocks=[vpc.cidr_block]
+                )    
         ],
         egress=[                                                                    
             aws.ec2.SecurityGroupEgressArgs(
                 from_port=0,
                 to_port=0,
-                protocol="tcp",
+                protocol="-1",
                 cidr_blocks=[vpc.cidr_block], 
                 ),
             ],
@@ -55,9 +61,12 @@ lambda_sg = aws.ec2.SecurityGroup(
 
 fn = aws.lambda_.Function("fn",
     runtime="dotnet6",
-    handler="DotnetLambda::DotnetLambda.Function::FunctionHandler",
+    handler="LambdaDemo::LambdaDemo.Function::FunctionHandler",
     role=role.arn,
     code=pulumi.FileArchive("./function/app.zip"),
+    environment=aws.lambda_.FunctionEnvironmentArgs(
+        variables={
+            "SECRET_NAME" : config.require_secret('secretName')}),
     vpc_config=aws.lambda_.FunctionVpcConfigArgs(
         subnet_ids=[config.require('subnetPublicAId')],
         security_group_ids=[lambda_sg.id]
@@ -65,7 +74,15 @@ fn = aws.lambda_.Function("fn",
 
 api = apigateway.RestAPI("api",
   routes=[
-    apigateway.RouteArgs(path="/", method=apigateway.Method.GET, event_handler=fi)])
+    apigateway.RouteArgs(path="/", method=apigateway.Method.GET, event_handler=fn)])
+
+secrets_manager_vpc_endpoint = aws.ec2.VpcEndpoint("my_secrets_manager_vpc_endpoint",
+        vpc_id=vpc.id,
+        service_name="com.amazonaws."+aws.get_region().name+".secretsmanager",
+        vpc_endpoint_type="Interface",
+        subnet_ids=[config.require('subnetPublicAId')],
+        security_group_ids=[lambda_sg.id],
+        )
 '''
 rds_sg = aws.ec2.SecurityGroup(
         "rds-sg",

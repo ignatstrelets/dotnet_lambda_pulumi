@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env: 
+  AWS_BUCKET_URI: ${{ secrets.AWS_BUCKET_URI}}
+  AWS_REGION: "eu-north-1"
+
 jobs:
   build:
 
@@ -24,4 +28,20 @@ jobs:
       run: dotnet tool install -g Amazon.Lambda.Tools && export PATH="$PATH:/home/ubuntu/.dotnet/tools"
     - name: Build Lambda function
       run: cd function/dotnet_lambda_app && dotnet lambda package ../app.zip
+    - name: Prepare for Upload
+      run: |
+        mkdir /tmp/upload
+        mv dotnet_app.zip /tmp/upload/
+        
+    - if: github.event.inputs.upload_artifact == 'true'
+      name: Configure AWS Credentials 
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        aws-region: ${{env.AWS_REGION}}
+    - if: github.event.inputs.upload_artifact == 'true'  
+      name: Upload to S3       
+      run: |
+        aws s3 sync /tmp/upload $AWS_BUCKET_URI --delete        
       

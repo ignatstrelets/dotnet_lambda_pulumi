@@ -31,9 +31,11 @@ public class Function
 
 	    string region = Environment.GetEnvironmentVariable("AWS_REGION");
 	    
+
 	    string secretName = Environment.GetEnvironmentVariable("SECRET_NAME");
 
             IAmazonSecretsManager client = new AmazonSecretsManagerClient(RegionEndpoint.GetBySystemName(region));
+	    Console.WriteLine("Trying to open connection to SM");
 
 	    GetSecretValueRequest secretRequest = new GetSecretValueRequest
     	    {

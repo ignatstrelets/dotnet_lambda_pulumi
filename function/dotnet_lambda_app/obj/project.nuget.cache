@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "t1qnkhuZeKl4IuobVargmo3hYmwUP4kV/sOLKZCpBCDrJY7BZFILRSm+pKlOnfe347jUAikjr/tpK5NSs0Kh+w==",
+  "dgSpecHash": "qkHB64b2RuWtqsBq7O2lUyysWIHy8L4zTalmn8McXWpUN3eZLfmzrBgOBqXeyhnrDGhcLrdbDlmYCDdSyWS01Q==",
   "success": true,
   "projectFilePath": "/home/ubuntu/deployment_p_p/function/dotnet_lambda_app/LambdaDemo.csproj",
   "expectedPackageFiles": [
@@ -17,8 +17,6 @@
     "/home/ubuntu/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/ubuntu/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
     "/home/ubuntu/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
-    "/home/ubuntu/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/6.0.26/microsoft.netcore.app.runtime.linux-x64.6.0.26.nupkg.sha512",
-    "/home/ubuntu/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/6.0.26/microsoft.aspnetcore.app.runtime.linux-x64.6.0.26.nupkg.sha512",
     "/home/ubuntu/.nuget/packages/microsoft.netcore.app.crossgen2.linux-x64/6.0.26/microsoft.netcore.app.crossgen2.linux-x64.6.0.26.nupkg.sha512"
   ],
   "logs": []

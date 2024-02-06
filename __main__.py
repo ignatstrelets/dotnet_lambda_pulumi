@@ -71,7 +71,6 @@ fn = aws.lambda_.Function("fn",
     s3_bucket=code_s3_bucket,
     s3_key=code_s3_key,
     source_code_hash=aws.s3.get_bucket_object(bucket=code_s3_bucket, key=code_s3_key).etag,                      
-    code=pulumi.FileArchive("./function/app.zip"),
     environment=aws.lambda_.FunctionEnvironmentArgs(
         variables={
             "SECRET_NAME" : config.require_secret('secretName')}),

@@ -61,6 +61,7 @@ lambda_sg = aws.ec2.SecurityGroup(
 
 fn = aws.lambda_.Function("fn",
     runtime="dotnet6",
+    timeout=10,                      
     handler="LambdaDemo::LambdaDemo.Function::FunctionHandler",
     role=role.arn,
     code=pulumi.FileArchive("./function/app.zip"),
@@ -80,6 +81,7 @@ secrets_manager_vpc_endpoint = aws.ec2.VpcEndpoint("my_secrets_manager_vpc_endpo
         vpc_id=vpc.id,
         service_name="com.amazonaws."+aws.get_region().name+".secretsmanager",
         vpc_endpoint_type="Interface",
+        private_dns_enabled=True,                                           
         subnet_ids=[config.require('subnetPublicAId')],
         security_group_ids=[lambda_sg.id],
         )
@@ -103,6 +105,7 @@ rds_subnet_group = aws.rds.SubnetGroup('rds-subnet-group',
             config.require('subnetPrivateBId')])
 
 rds_instance = aws.rds.Instance('dotnet-psql',
+        identifier='dotnet-psql',
         allocated_storage=20,
         storage_type='gp2',
         engine='postgres',

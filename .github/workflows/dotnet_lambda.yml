@@ -28,11 +28,11 @@ jobs:
     - name: Install Dotnet Lambda Global CLI
       run: dotnet tool install -g Amazon.Lambda.Tools && export PATH="$PATH:/home/ubuntu/.dotnet/tools"
     - name: Build Lambda function
-      run: cd function/dotnet_lambda_app && dotnet lambda package ../app.zip
+      run: cd function/dotnet_lambda_app && dotnet lambda package ../function.zip
     - name: Prepare for Upload
       run: |
         mkdir /tmp/upload
-        mv dotnet_app.zip /tmp/upload/
+        cd function && mv function.zip /tmp/upload/
         
     - if: github.event.inputs.upload_artifact == 'true'
       name: Configure AWS Credentials 

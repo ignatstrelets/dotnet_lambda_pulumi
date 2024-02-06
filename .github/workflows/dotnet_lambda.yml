@@ -44,5 +44,5 @@ jobs:
     - if: github.event.inputs.upload_artifact == 'true'  
       name: Upload to S3       
       run: |
-        aws s3 sync /tmp/upload $AWS_BUCKET_URI --delete        
+        aws s3 mv /tmp/upload/function.zip $AWS_BUCKET_URI         
       

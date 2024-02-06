@@ -59,12 +59,18 @@ lambda_sg = aws.ec2.SecurityGroup(
             ],
         )
 
+code_s3_bucket = "..."
+
+code_s3_key = "..."
+
 fn = aws.lambda_.Function("fn",
     runtime="dotnet6",
     timeout=10,                      
     handler="LambdaDemo::LambdaDemo.Function::FunctionHandler",
     role=role.arn,
-    code=pulumi.FileArchive("./function/app.zip"),
+    s3_bucket=code_s3_bucket,
+    s3_key=code_s3_key,
+    source_code_hash=aws.s3.get_bucket_object(bucket=code_s3_bucket, key=code_s3_key).etag,
     environment=aws.lambda_.FunctionEnvironmentArgs(
         variables={
             "SECRET_NAME" : config.require_secret('secretName')}),

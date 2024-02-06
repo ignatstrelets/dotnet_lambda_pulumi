@@ -85,7 +85,7 @@ secrets_manager_vpc_endpoint = aws.ec2.VpcEndpoint("my_secrets_manager_vpc_endpo
         subnet_ids=[config.require('subnetPublicAId')],
         security_group_ids=[lambda_sg.id],
         )
-'''
+
 rds_sg = aws.ec2.SecurityGroup(
         "rds-sg",
         vpc_id=vpc.id,
@@ -118,5 +118,5 @@ rds_instance = aws.rds.Instance('dotnet-psql',
         vpc_security_group_ids=[rds_sg.id],
         skip_final_snapshot=True
         )
-'''
+
 pulumi.export("url", api.url) 

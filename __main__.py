@@ -63,7 +63,10 @@ code_s3_bucket = "..."
 
 code_s3_key = "..."
 
-fn = aws.lambda_.Function("fn",
+func_name = code_s3_key.removesuffix(".zip")
+
+fn = aws.lambda_.Function(func_name,
+    name=func_name,
     runtime="dotnet6",
     timeout=10,                      
     handler="LambdaDemo::LambdaDemo.Function::FunctionHandler",
@@ -79,10 +82,33 @@ fn = aws.lambda_.Function("fn",
         security_group_ids=[lambda_sg.id]
     ))
 
-api = apigateway.RestAPI("api",
-  routes=[
-    apigateway.RouteArgs(path="/", method=apigateway.Method.GET, event_handler=fn)])
+api_to_update = api
 
+new_resource = apigateway.Resource("resource-"+func_name,
+    rest_api=api_to_update.id,
+    parent_id=api_to_update.root_resource_id,
+    path_part=func_name)
+
+new_method = apigateway.Method("get-"+func_name,
+    rest_api=api_to_update.id,
+    resource_id=new_resource.id,                           
+    http_method="GET",
+    authorization="NONE")
+
+new_intergration = apigateway.Integration("integration-"+func_name,
+    rest_api=api_to_update.id,
+    resource_id=new_resource.id,
+    http_method=new_method.http_method,
+    integration_http_method="GET",
+    type="AWS_PROXY",
+    uri=fn.invoke_arn)
+
+method_response = aws.apigateway.MethodResponse("response-"+func_name,
+    rest_api=api_to_update.id,
+    resource_id=new_resource.id,
+    http_method=new_method.http_method,
+    status_code="200")
+                        
 secrets_manager_vpc_endpoint = aws.ec2.VpcEndpoint("my_secrets_manager_vpc_endpoint",
         vpc_id=vpc.id,
         service_name="com.amazonaws."+aws.get_region().name+".secretsmanager",
